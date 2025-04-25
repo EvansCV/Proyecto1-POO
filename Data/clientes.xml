@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<clientes>
+       <cliente id="000000000">
+              <nombre>Sin Registro</nombre>
+              <telefono>NA</telefono>
+              <email>NA</email>
+       </cliente>
+       <cliente id="300001111">
+              <nombre>Juan Perez</nombre>
+              <telefono>7777-1000</telefono>
+              <email>juan.p@gmail</email>
+       </cliente>
+       <cliente id="300002222">
+              <nombre>Ana Rojas</nombre>
+              <telefono>7777-2000</telefono>
+              <email>ana.r@gmail</email>
+       </cliente>
+       <cliente id="300003333">
+              <nombre>Pedro Arnaez</nombre>
+              <telefono>7777-3000</telefono>
+              <email>pedro.a@gmail</email>
+       </cliente>
+</clientes>

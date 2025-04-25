@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<servicios>
+       <servicio id="100">
+              <nombre>Asesoria Legal</nombre>
+              <precio>40000</precio>
+       </servicio>
+       <servicio id="101">
+              <nombre>Pension Familiar</nombre>
+              <precio>30000</precio>
+       </servicio>
+       <servicio id="102">
+              <nombre>Demandas</nombre>
+              <precio>100000</precio>
+       </servicio>
+</servicios>
