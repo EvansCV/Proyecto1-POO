@@ -59,4 +59,45 @@ public class HandlerServicios {
         }
         return servicios;
     }
+    
+    public static void guardar(String nombreXML, ArrayList<Servicio> servicios) {
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document documento = builder.newDocument();
+
+            // Crear el elemento raíz
+            Element raiz = documento.createElement("servicios");
+            documento.appendChild(raiz);
+
+            // Recorrer la lista de abogados y crear nodos
+            for (Servicio s : servicios) {
+                Element servicio = documento.createElement("servicio");
+                servicio.setAttribute("id", String.valueOf(s.getId()));
+
+                Element nombre = documento.createElement("nombre");
+                nombre.appendChild(documento.createTextNode(s.getNombre()));
+                servicio.appendChild(nombre);
+
+                Element puesto = documento.createElement("precio");
+                puesto.appendChild(documento.createTextNode(Integer.toString(s.getPrecio())));
+                servicio.appendChild(puesto);
+
+                raiz.appendChild(servicio);
+            }
+
+            // Escribir el contenido en un archivo XML
+            javax.xml.transform.TransformerFactory tf = javax.xml.transform.TransformerFactory.newInstance();
+            javax.xml.transform.Transformer transformer = tf.newTransformer();
+            transformer.setOutputProperty(javax.xml.transform.OutputKeys.INDENT, "yes");
+
+            javax.xml.transform.dom.DOMSource source = new javax.xml.transform.dom.DOMSource(documento);
+            javax.xml.transform.stream.StreamResult result = new javax.xml.transform.stream.StreamResult(new File(nombreXML));
+
+            transformer.transform(source, result);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

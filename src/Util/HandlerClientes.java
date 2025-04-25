@@ -60,4 +60,49 @@ public class HandlerClientes {
         }
         return clientes;
     }
+    
+    public static void guardar(String nombreXML, ArrayList<Cliente> clientes) {
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document documento = builder.newDocument();
+
+            // Crear el elemento raíz
+            Element raiz = documento.createElement("clientes");
+            documento.appendChild(raiz);
+
+            // Recorrer la lista de abogados y crear nodos
+            for (Cliente c : clientes) {
+                Element cliente = documento.createElement("cliente");
+                cliente.setAttribute("id", String.valueOf(c.getId()));
+
+                Element nombre = documento.createElement("nombre");
+                nombre.appendChild(documento.createTextNode(c.getNombre()));
+                cliente.appendChild(nombre);
+
+                Element puesto = documento.createElement("email");
+                puesto.appendChild(documento.createTextNode(c.getEmail()));
+                cliente.appendChild(puesto);
+
+                Element telefono = documento.createElement("telefono");
+                telefono.appendChild(documento.createTextNode(c.getTelefono()));
+                cliente.appendChild(telefono);
+
+                raiz.appendChild(cliente);
+            }
+
+            // Escribir el contenido en un archivo XML
+            javax.xml.transform.TransformerFactory tf = javax.xml.transform.TransformerFactory.newInstance();
+            javax.xml.transform.Transformer transformer = tf.newTransformer();
+            transformer.setOutputProperty(javax.xml.transform.OutputKeys.INDENT, "yes");
+
+            javax.xml.transform.dom.DOMSource source = new javax.xml.transform.dom.DOMSource(documento);
+            javax.xml.transform.stream.StreamResult result = new javax.xml.transform.stream.StreamResult(new File(nombreXML));
+
+            transformer.transform(source, result);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

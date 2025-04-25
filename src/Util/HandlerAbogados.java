@@ -75,4 +75,60 @@ public class HandlerAbogados {
         }
         return abogados;
     }
+    
+    
+    public static void guardar(String nombreXML, ArrayList<Abogado> abogados) {
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            Document documento = builder.newDocument();
+
+            // Crear el elemento raíz
+            Element raiz = documento.createElement("abogados");
+            documento.appendChild(raiz);
+
+            // Recorrer la lista de abogados y crear nodos
+            for (Abogado ab : abogados) {
+                Element abogado = documento.createElement("abogado");
+                abogado.setAttribute("id", String.valueOf(ab.getId()));
+
+                Element nombre = documento.createElement("nombre");
+                nombre.appendChild(documento.createTextNode(ab.getNombre()));
+                abogado.appendChild(nombre);
+
+                Element puesto = documento.createElement("puesto");
+                puesto.appendChild(documento.createTextNode(ab.getPuesto()));
+                abogado.appendChild(puesto);
+
+                Element telefono = documento.createElement("telefono");
+                telefono.appendChild(documento.createTextNode(ab.getTelefono()));
+                abogado.appendChild(telefono);
+
+                // Servicios
+                Element servicios = documento.createElement("servicios");
+                for (int idServicio : ab.getServicios()) {
+                    Element id = documento.createElement("id");
+                    id.appendChild(documento.createTextNode(String.valueOf(idServicio)));
+                    servicios.appendChild(id);
+                }
+                abogado.appendChild(servicios);
+
+                raiz.appendChild(abogado);
+            }
+
+            // Escribir el contenido en un archivo XML
+            javax.xml.transform.TransformerFactory tf = javax.xml.transform.TransformerFactory.newInstance();
+            javax.xml.transform.Transformer transformer = tf.newTransformer();
+            transformer.setOutputProperty(javax.xml.transform.OutputKeys.INDENT, "yes");
+
+            javax.xml.transform.dom.DOMSource source = new javax.xml.transform.dom.DOMSource(documento);
+            javax.xml.transform.stream.StreamResult result = new javax.xml.transform.stream.StreamResult(new File(nombreXML));
+
+            transformer.transform(source, result);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

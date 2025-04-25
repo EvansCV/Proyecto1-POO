@@ -27,7 +27,7 @@ public class Servicio {
         return nombre;
     }
 
-    public double getPrecio() {
+    public int getPrecio() {
         return precio;
     }
 

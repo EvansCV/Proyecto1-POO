@@ -27,8 +27,11 @@ public class Main {
         ArrayList<Abogado> listaAbogados;
         listaAbogados = Util.HandlerAbogados.cargar("Data\\abogados.xml");
         
-        for (Abogado a: listaAbogados) {
-            System.out.println(a);
-        }
+        Abogado prueba1 = listaAbogados.get(0);
+        prueba1.setNombre("Juan Perez");
+        
+        listaAbogados.set(0, prueba1);
+        
+        Util.HandlerAbogados.guardar("Data\\abogados.xml", listaAbogados);
     }   
 }
