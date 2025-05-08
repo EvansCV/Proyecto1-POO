@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<abogados>
+    <abogado id="201">
+        <nombre>Maria Salas</nombre>
+        <puesto>8888-9999</puesto>
+        <telefono>Penalista</telefono>
+        <servicios>
+            <id>100</id>
+            <id>101</id>
+            <id>102</id>
+        </servicios>
+    </abogado>
+    <abogado id="202">
+        <nombre>Pedro Blanco</nombre>
+        <puesto>9999-77777</puesto>
+        <telefono>Traspasos</telefono>
+        <servicios>
+            <id>101</id>
+        </servicios>
+    </abogado>
+    <abogado id="200">
+        <nombre>Juan Perez</nombre>
+        <puesto>Familia</puesto>
+        <telefono>7777-8888</telefono>
+        <servicios>
+            <id>100</id>
+            <id>101</id>
+        </servicios>
+    </abogado>
+</abogados>

@@ -4,17 +4,23 @@
  */
 package Ventanas;
 
+import Aplicación.Main;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Usuario
  */
 public class VerEditar extends javax.swing.JFrame {
-
+    ArrayList<Integer> serviciosPorActualizar = new ArrayList();
     /**
      * Creates new form VerEditar
      */
     public VerEditar() {
         initComponents();
+        cargarServicios();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -107,11 +113,46 @@ public class VerEditar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Abogados a1 = new Abogados();
-        a1.setVisible(true);
+
         this.dispose();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            boolean validado = (boolean) model.getValueAt(i, 0);
+            if (validado) {
+                this.serviciosPorActualizar.add(Integer.valueOf((String)(model.getValueAt(i, 1))));
+            }
+            Abogados.abogadoNuevo.setServicios(this.serviciosPorActualizar);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void cargarServicios() {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0); // Limpiar todas las filas existentes
+        
+        
+        // Recorrer la lista de servicios y añadirlos a la tabla
+        for (int i=0; i < Main.servicios.size(); i++) {
+            try {
+                if (Abogados.abogadoNuevo.getServicios().get(i) == Main.servicios.get(i).getId()) {
+                    model.addRow(new Object[]{
+                    true, // Valor por defecto para Validado
+                    Main.servicios.get(i).getId()
+                    });
+                } else {
+                    model.addRow(new Object[]{
+                    false, // Valor por defecto para Validado
+                    Main.servicios.get(i).getId()
+                    });
+                }
+            } catch (IndexOutOfBoundsException e) {
+                model.addRow(new Object[]{
+                false, // Valor por defecto para Validado
+                Main.servicios.get(i).getId()
+                });
+            }
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
